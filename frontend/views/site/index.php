@@ -1,9 +1,11 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use frontend\models\Films;
 use frontend\models\forms\SearchFilms;
 
 /* @var $searchFilmsForm SearchFilms */
+/* @var $schedule Films[] */
 
 $this->title = 'Films schedule';
 ?>
@@ -26,6 +28,11 @@ $this->title = 'Films schedule';
 
     <div class="body-content">
         <div class="row">
+            <?php
+            echo '<pre>';
+            print_r($schedule);
+            echo '</pre>';
+            ?>
         </div>
     </div>
 </div>

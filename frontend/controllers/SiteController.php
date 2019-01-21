@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
+use frontend\models\Films;
 use frontend\models\forms\SearchFilms;
 
 /**
@@ -38,13 +39,15 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $searchForm = new SearchFilms();
+        $schedule = [];
         if($searchForm->load(Yii::$app->request->get())) {
             if($searchForm->validate()) {
-                // todo: filter here
+                $schedule = Films::getSchedule($searchForm);
             }
         }
         return $this->render('index', [
             'searchFilmsForm' => $searchForm,
+            'schedule' => $schedule,
         ]);
     }
 }
