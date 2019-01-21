@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use kartik\date\DatePicker;
 use frontend\models\forms\SearchFilms;
 
 /* @var $searchFilmsForm SearchFilms */
@@ -19,9 +20,21 @@ $this->title = 'Films schedule';
                 'template' => '{label}{input}{error}',
             ],
         ]);?>
-            <?=$form->field($searchFilmsForm, "from")->textInput(['placeholder' => 'from'])?>
-            <?=$form->field($searchFilmsForm, "to")->textInput(['placeholder' => 'to'])?>
-            <?=Html::submitButton('Search', ['class' => 'btn btn-primary'])?>
+            <?=DatePicker::widget([
+                'model' => $searchFilmsForm,
+                'attribute' => 'from',
+                'attribute2' => 'to',
+                'options' => ['placeholder' => 'Start date'],
+                'options2' => ['placeholder' => 'End date'],
+                'type' => DatePicker::TYPE_RANGE,
+                'form' => $form,
+                'pluginOptions' => [
+                    'format' => 'yyyy-mm-dd',
+                    'autoclose' => true,
+                    'startDate' => date('Y-m-d'),
+                ]
+            ]);?><br />
+            <?=Html::submitButton('Search', ['class' => 'btn btn-success'])?>
         <?php ActiveForm::end();?>
     </div>
 
