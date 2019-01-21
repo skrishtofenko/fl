@@ -10,11 +10,14 @@ class Films extends \common\models\Films
     {
         $sessions = Sessions::getBetween($searchForm);
 
-        $films = ArrayHelper::map(self::find()
-            ->where(['in', 'id', array_unique(ArrayHelper::getColumn($sessions, 'film_id'))])
-            ->orderBy(['title' => SORT_ASC])
-            ->asArray()
-            ->all(), 'id', 'title');
+        $films = ArrayHelper::map(
+            self::find()
+                ->where(['in', 'id', array_unique(ArrayHelper::getColumn($sessions, 'film_id'))])
+                ->orderBy(['title' => SORT_ASC])
+                ->asArray()
+                ->all(),
+            'id', 'title'
+        );
 
         return [
             'sessions' => $sessions,

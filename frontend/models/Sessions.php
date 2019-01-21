@@ -21,12 +21,13 @@ class Sessions extends \common\models\Sessions
         return Sessions::find()
             ->select([
                 '(session_time)::date session_date',
-                'array_agg((session_time)::time ORDER BY session_time) session_time',
+                'array_agg(to_char(session_time, \'HH:MI\') ORDER BY session_time) session_time',
                 'film_id'
             ])
             ->where(['between', 'session_time', $startDateTime, $endDateTime])
             ->orderBy(['session_date' => SORT_ASC])
             ->groupBy(['(session_time)::date', 'film_id'])
+            ->asArray()
             ->all();
     }
 }

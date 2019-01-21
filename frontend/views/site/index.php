@@ -1,11 +1,10 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use frontend\models\Films;
 use frontend\models\forms\SearchFilms;
 
 /* @var $searchFilmsForm SearchFilms */
-/* @var $schedule Films[] */
+/* @var $schedule array */
 
 $this->title = 'Films schedule';
 ?>
@@ -28,11 +27,17 @@ $this->title = 'Films schedule';
 
     <div class="body-content">
         <div class="row">
-            <?php
-            echo '<pre>';
-            print_r($schedule);
-            echo '</pre>';
-            ?>
+            <?php $currentDate = ''?>
+            <?php foreach ($schedule['sessions'] as $session):?>
+                <?php if($session['session_date'] != $currentDate):?>
+                    <?php $currentDate = $session['session_date']?>
+                    <h2>Sessions on <?=$currentDate?></h2>
+                <?php endif;?>
+                <p>
+                    <strong><?=$schedule['films'][$session['film_id']]?></strong>
+                    <i><?=trim($session['session_time'], '{}')?></i>
+                </p>
+            <?php endforeach;?>
         </div>
     </div>
 </div>

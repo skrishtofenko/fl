@@ -39,7 +39,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $searchForm = new SearchFilms();
-        $schedule = [];
+        $schedule = ['sessions' => [], 'films' => []];
         if($searchForm->load(Yii::$app->request->get())) {
             if($searchForm->validate()) {
                 $schedule = Films::getSchedule($searchForm);
