@@ -1,7 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+use Yii;
 use yii\web\Controller;
+use frontend\models\forms\SearchFilms;
 
 /**
  * Site controller
@@ -35,6 +37,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchForm = new SearchFilms();
+        if($searchForm->load(Yii::$app->request->get())) {
+            if($searchForm->validate()) {
+                // todo: filter here
+            }
+        }
+        return $this->render('index', [
+            'searchFilmsForm' => $searchForm,
+        ]);
     }
 }
