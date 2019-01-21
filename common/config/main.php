@@ -9,5 +9,12 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'pgsql:host=localhost;dbname=fl',
+            'username' => 'fl',
+            'password' => 'n7Ks~i*il*5GgxsM',
+            'charset' => 'utf8',
+        ],
     ],
 ];
